@@ -74,16 +74,20 @@ public class characterControler : MonoBehaviour
             isInvincible = false;
             
         }
-        if (otherCollider.CompareTag("enemy_shoot") && otherCollider != null)
+        if (otherCollider.CompareTag("enemy_shoot") && otherCollider != null )
         {
             if (isInvincible == false)
             {
                 Damage(1);
+                Destroy(otherCollider.gameObject);
+                isInvincible = true;
+                yield return new WaitForSeconds(invincibleTimer);
+                isInvincible = false;
             }
-            Destroy(otherCollider.gameObject);
-            isInvincible = true;
-            yield return new WaitForSeconds(invincibleTimer);
-            isInvincible = false;
+            else
+            {
+                Destroy(otherCollider.gameObject);
+            }
         }
     }
 
