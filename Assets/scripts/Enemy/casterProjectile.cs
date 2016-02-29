@@ -11,15 +11,22 @@ public class casterProjectile : MonoBehaviour {
     {
         target = GameObject.FindWithTag("Player").transform;
         direction = target.position;
+
+
+        movement = new Vector2(
+               -4 /*Différence maximale entre y*/,
+               direction.y - transform.position.y);
+
+
+        movement = Vector2.ClampMagnitude(movement, moveSpeed);
+
+        GetComponent<Rigidbody2D>().velocity = movement;
+
     }
+
 
     void Update()
     {
-       movement = new Vector2(
-              moveSpeed * -direction.x,
-              direction.y - transform.position.y);
-
-        GetComponent<Rigidbody2D>().velocity = movement;
 
         if (transform.position.x < -0.5)
         {
